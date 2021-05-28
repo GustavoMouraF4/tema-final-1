@@ -7,5 +7,10 @@ pipeline {
                 bat ("gradlew test")
             }
         }
+        stage('build') {
+            steps{
+                bat ("gradlew clean build")
+            }
+        }
     }
 }
