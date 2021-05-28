@@ -27,11 +27,11 @@ import java.io.IOException;
 public class RxNettyHandlerTest {
 
     private final AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
-    private final HttpServer<ByteBuf,ByteBuf> httpServer = RxNetty.createHttpServer(8080, new RxNettyHandler());
+    private final HttpServer<ByteBuf,ByteBuf> httpServer = RxNetty.createHttpServer(8089, new RxNettyHandler());
     @Test
     public void TestingConnection() throws InterruptedException, IOException {
         httpServer.start();
-        HttpUriRequest request = new HttpGet("http://localhost:8080/calculator?num1=7&op=SUM&num2=5");
+        HttpUriRequest request = new HttpGet("http://localhost:8089/calculator?num1=7&op=SUM&num2=5");
         HttpResponse httpResponse = HttpClientBuilder.create().build().execute(request);
         Assert.assertEquals(httpResponse.getStatusLine().getStatusCode(), HttpStatus.SC_OK);
         httpServer.shutdown();
@@ -40,7 +40,7 @@ public class RxNettyHandlerTest {
     @Test
     public void TestingMediaType() throws InterruptedException, IOException {
         httpServer.start();
-        HttpUriRequest request = new HttpGet("http://localhost:8080/calculator?num1=3&op=SUM&num2=1");
+        HttpUriRequest request = new HttpGet("http://localhost:8089/calculator?num1=3&op=SUM&num2=1");
         HttpResponse httpResponse = HttpClientBuilder.create().build().execute(request);
         Assert.assertEquals( "text/plain", ContentType.getOrDefault(httpResponse.getEntity()).getMimeType());
         httpServer.shutdown();
@@ -49,7 +49,7 @@ public class RxNettyHandlerTest {
     @Test
     public void TestingConnectionWithHistory() throws InterruptedException, IOException {
         httpServer.start();
-        HttpUriRequest request = new HttpGet("http://localhost:8080/calculator?history");
+        HttpUriRequest request = new HttpGet("http://localhost:8089/calculator?history");
         HttpResponse httpResponse = HttpClientBuilder.create().build().execute(request);
         Assert.assertEquals(httpResponse.getStatusLine().getStatusCode(), HttpStatus.SC_OK);
         httpServer.shutdown();
