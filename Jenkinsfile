@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('test') {
             steps {
-                   bat gradlew test
+                   sh gradlew test
             }
         }
     }
