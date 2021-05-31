@@ -12,11 +12,7 @@ pipeline {
                 bat ("gradlew clean build")
             }
         }
-        stage('artifactoryPublish') {
-                    steps{
-                        bat ("gradlew artifactoryPublish")
-                    }
-                }
+
     }
 }
 
